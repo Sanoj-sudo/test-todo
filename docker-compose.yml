@@ -1,0 +1,18 @@
+# Local MySQL for development only. In production the app uses AWS RDS for MySQL.
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todoapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-proot"]
+      interval: 3s
+      retries: 20
+
+volumes:
+  mysqldata:

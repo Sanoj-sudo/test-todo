@@ -1,0 +1,25 @@
+[Unit]
+Description=Orbit Todo (Node.js)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=todoapp
+Group=todoapp
+WorkingDirectory=/opt/todoapp
+EnvironmentFile=/opt/todoapp/.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node server/index.js
+Restart=always
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/opt/todoapp
+
+[Install]
+WantedBy=multi-user.target

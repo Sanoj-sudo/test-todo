@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#070814" />
+    <title>Orbit — 3D Todo</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <canvas id="scene" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div id="tooltip" class="tooltip" hidden></div>
+
+    <aside class="hero" aria-hidden="true">
+      <p class="hero-kicker">Orbit</p>
+      <p class="hero-line">Every task is a world.<br /><span>Finish it, and it falls into the inner ring.</span></p>
+    </aside>
+
+    <main class="panel">
+      <header class="panel-header">
+        <div>
+          <p class="eyebrow" id="today"></p>
+          <h1 id="greeting">Hello</h1>
+        </div>
+        <div class="progress" title="Completion">
+          <svg viewBox="0 0 44 44" aria-hidden="true">
+            <defs>
+              <linearGradient id="progress-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#a78bfa" />
+                <stop offset="100%" stop-color="#34d399" />
+              </linearGradient>
+            </defs>
+            <circle class="progress-track" cx="22" cy="22" r="18" />
+            <circle class="progress-bar" id="progress-bar" cx="22" cy="22" r="18" />
+          </svg>
+          <span id="progress-text">0%</span>
+        </div>
+      </header>
+
+      <form id="composer" class="composer" autocomplete="off">
+        <div class="composer-input">
+          <svg class="composer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+          <input id="title" name="title" placeholder="Add a new task…  (press / to focus)" maxlength="500" required aria-label="New task" />
+        </div>
+        <div class="composer-row">
+          <div class="priority-picker" role="radiogroup" aria-label="Priority">
+            <label class="chip low"><input type="radio" name="priority" value="1" /><span>Low</span></label>
+            <label class="chip medium"><input type="radio" name="priority" value="2" checked /><span>Medium</span></label>
+            <label class="chip high"><input type="radio" name="priority" value="3" /><span>High</span></label>
+          </div>
+          <input type="date" name="due_date" class="date-input" aria-label="Due date" />
+          <button type="submit" class="btn-primary">Add</button>
+        </div>
+      </form>
+
+      <nav class="filters" role="tablist" aria-label="Filter tasks">
+        <button type="button" role="tab" data-filter="all" class="active">All <span data-count="all">0</span></button>
+        <button type="button" role="tab" data-filter="active">Active <span data-count="active">0</span></button>
+        <button type="button" role="tab" data-filter="done">Done <span data-count="done">0</span></button>
+        <span class="filter-indicator" aria-hidden="true"></span>
+      </nav>
+
+      <ul id="list" class="todo-list" aria-live="polite"></ul>
+
+      <div id="empty" class="empty">
+        <div class="empty-orb" aria-hidden="true"></div>
+        <p id="empty-text">Loading your universe…</p>
+      </div>
+
+      <footer class="panel-footer">
+        <span id="remaining">—</span>
+        <button type="button" id="clear-completed" class="btn-ghost">Clear completed</button>
+      </footer>
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

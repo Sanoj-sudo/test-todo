@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: test-todo
+  checksum: 29f1c831aa0ed1d3d708da7a23347c749a370d9fb2a583ab1ec5232e5b98455a
+version: "1.0"
